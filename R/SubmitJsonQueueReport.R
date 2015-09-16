@@ -39,7 +39,8 @@ SubmitJsonQueueReport <- function(report.description,interval.seconds=5,max.atte
   response <- ApiRequest(body=report.description,func.name="Report.Queue")
   
   #If response returns an error, return error message. Else, continue with capturing report ID
-  if(!is.numeric(response$reportID)) {
+  reportID<-as.numeric( response$reportID ) 
+  if(!is.numeric( reportID )) {
     stop("ERROR: the API validated the report, but did not return a report ID")
   } else {
     report.id <- response$reportID
